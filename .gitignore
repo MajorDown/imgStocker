@@ -1,2 +1,4 @@
 #dossier node_module
 node_modules/
+#fichier .env
+.env

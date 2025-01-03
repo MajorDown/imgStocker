@@ -1,26 +1,23 @@
-import express, { Request, Response } from 'express';
+// src/index.ts
+import express from 'express';
+import fileUpload from 'express-fileupload';
+import uploadImage from './routes/uploadImage'; // Import par défaut
 
-// Créer une instance d'Express
 const app = express();
+const PORT = process.env.PORT || 3000;
 
-const PORT = process.env.PORT;
+// Middleware pour gérer les uploads de fichiers
+app.use(fileUpload());
 
-// Middleware pour parser les requêtes JSON
-app.use(express.json());
+// Route POST /upload
+app.post('/upload', uploadImage);
 
-
-// route POST pour uploader une image
-app.post('/upload', (req: Request, res: Response) => {
-  console.log("imgStocker ~> request POST /upload");
-  res.send('Image uploadée');
-});
-
-// Route de base
-app.get('/', (req: Request, res: Response) => {
-  res.send('Hello World!');
+// Route GET pour vérifier le serveur
+app.get('/', (req: express.Request, res: express.Response) => {
+    res.send('Hello World!');
 });
 
 // Démarrer le serveur
 app.listen(PORT, () => {
-  console.log(`imgStocker lancé sur le port ${PORT}`);
+    console.log(`Serveur lancé sur le port ${PORT}`);
 });
