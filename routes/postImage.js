@@ -1,5 +1,6 @@
 import path from "path";
-import fs from "fs";
+import fs from "";
+import { authorizedExtensions } from "../utils/imageMIMEtypes";
 
 /**
  * @description Télécharge une image dans le dossier images
@@ -18,13 +19,6 @@ export const postImage = (req, res) => {
   const image = req.files.image;
 
   // Vérifie si le fichier est une image
-  const authorizedExtensions = [
-    "image/png",
-    "image/jpeg",
-    "image/jpg",
-    "image/gif",
-    "image/webp",
-  ];
   if (!authorizedExtensions.includes(image.mimetype)) {
     console.log(
       "imgStocker ~> POST: /postImage ~> status: 400 (type de fichier non autorisé)"
